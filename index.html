@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EHS & Sustainable Development | Construction Framework</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a18;
+      --paper: #f5f0e8;
+      --sage: #5c7a5c;
+      --sage-light: #8aab8a;
+      --sage-pale: #d6e8d6;
+      --rust: #b85c38;
+      --rust-light: #e8845e;
+      --gold: #c9a84c;
+      --cream: #faf7f0;
+      --border: rgba(26,26,24,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* NOISE TEXTURE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.6;
+    }
+
+    /* HEADER */
+    header {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--sage), var(--gold), var(--sage), transparent);
+    }
+
+    .header-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 80% 20%, rgba(92,122,92,0.13) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 70% at 10% 80%, rgba(201,168,76,0.09) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(184,92,56,0.05) 0%, transparent 50%);
+    }
+
+    .header-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(26,26,24,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,26,24,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .header-inner {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.2s;
+    }
+
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--sage);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      line-height: 1.05;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.4s;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--sage);
+    }
+
+    .hero-title .accent {
+      color: var(--rust);
+    }
+
+    .hero-subtitle {
+      margin-top: 2rem;
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 580px;
+      color: rgba(26,26,24,0.72);
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.6s;
+    }
+
+    .hero-meta {
+      margin-top: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.8s;
+    }
+
+    .meta-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(4px);
+    }
+
+    .meta-tag .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+    }
+
+    .dot-green { background: var(--sage); }
+    .dot-rust { background: var(--rust); }
+    .dot-gold { background: var(--gold); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(26,26,24,0.4);
+      animation: fadeIn 1s ease forwards 1.2s, bounce 2s ease infinite 2s;
+      opacity: 0;
+    }
+
+    .scroll-hint::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 32px;
+      background: linear-gradient(var(--sage), transparent);
+    }
+
+    /* MAIN CONTENT */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* TOC SIDEBAR LAYOUT */
+    .content-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 4rem;
+      align-items: start;
+      padding: 5rem 0;
+    }
+
+    /* STICKY TOC */
+    .toc {
+      position: sticky;
+      top: 2rem;
+    }
+
+    .toc-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 1.2rem;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .toc-list li a {
+      display: block;
+      padding: 0.42rem 0.7rem;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: rgba(26,26,24,0.55);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      transition: all 0.2s ease;
+      line-height: 1.4;
+    }
+
+    .toc-list li a:hover,
+    .toc-list li a.active {
+      color: var(--ink);
+      border-left-color: var(--sage);
+      background: rgba(92,122,92,0.06);
+      padding-left: 1rem;
+    }
+
+    /* ARTICLE */
+    article { max-width: 680px; }
+
+    /* INTRO BLOCK */
+    .intro-block {
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--cream);
+      margin-bottom: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-block::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: linear-gradient(180deg, var(--sage), var(--gold));
+    }
+
+    .intro-block p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(26,26,24,0.82);
+    }
+
+    /* SECTIONS */
+    .section {
+      margin-bottom: 5rem;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-number {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      color: var(--rust);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-body {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: rgba(26,26,24,0.78);
+    }
+
+    .section-body p { margin-bottom: 1.1rem; }
+
+    /* SUBSECTION */
+    .subsection {
+      margin-top: 2rem;
+      padding: 1.8rem;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .subsection h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--ink);
+    }
+
+    /* PILL GRID */
+    .pill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+    }
+
+    .pill {
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border: 1px solid;
+    }
+
+    .pill-sage { border-color: var(--sage-light); color: var(--sage); background: var(--sage-pale); }
+    .pill-rust { border-color: #e8b4a0; color: var(--rust); background: #fdf0eb; }
+    .pill-gold { border-color: #e0cfa0; color: #7a6020; background: #fdf8ec; }
+
+    /* FEATURE CARDS */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .card {
+      padding: 1.4rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: white;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    }
+
+    .card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: rgba(26,26,24,0.62);
+    }
+
+    /* BLOCKQUOTE */
+    blockquote {
+      margin: 2rem 0;
+      padding: 1.8rem 2rem;
+      border-left: 3px solid var(--gold);
+      background: linear-gradient(135deg, rgba(201,168,76,0.05), transparent);
+      border-radius: 0 4px 4px 0;
+    }
+
+    blockquote p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.18rem;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+
+    /* TABLE */
+    .risk-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.2rem;
+      font-size: 0.83rem;
+    }
+
+    .risk-table th {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0.7rem 1rem;
+      text-align: left;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .risk-table td {
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+    }
+
+    .risk-table tr:nth-child(even) td { background: var(--cream); }
+
+    .risk-level {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
+
+    .risk-high { background: #fdecea; color: #c62828; }
+    .risk-med { background: #fff8e1; color: #f57c00; }
+    .risk-low { background: var(--sage-pale); color: var(--sage); }
+
+    /* CONCLUSION */
+    .conclusion {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 4rem;
+      margin: 0 -2rem;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .conclusion::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 90% 10%, rgba(92,122,92,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 5% 90%, rgba(201,168,76,0.15) 0%, transparent 50%);
+    }
+
+    .conclusion-inner { position: relative; }
+
+    .conclusion h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      color: var(--paper);
+    }
+
+    .conclusion h2 em {
+      font-style: italic;
+      color: var(--sage-light);
+    }
+
+    .conclusion p {
+      font-size: 0.97rem;
+      line-height: 1.8;
+      color: rgba(245,240,232,0.75);
+      max-width: 580px;
+      margin-bottom: 1rem;
+    }
+
+    .conclusion-quote {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 4px;
+      background: rgba(201,168,76,0.08);
+    }
+
+    .conclusion-quote p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--gold);
+      margin: 0;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      margin-top: 6rem;
+    }
+
+    footer p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: rgba(26,26,24,0.4);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .content-layout {
+        grid-template-columns: 1fr;
+      }
+      .toc { display: none; }
+      .card-grid { grid-template-columns: 1fr; }
+      .conclusion { padding: 2.5rem 1.5rem; margin: 0; }
+      header { padding: 5rem 1.5rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-bg"></div>
+  <div class="header-grid"></div>
+  <div class="header-inner">
+    <p class="eyebrow">Construction Industry Thesis · 2025</p>
+    <h1 class="hero-title">
+      Integrated <em>EHS</em> &amp;<br>
+      <span class="accent">Sustainable</span><br>
+      Development
+    </h1>
+    <p class="hero-subtitle">
+      A structured framework for achieving excellence in Environmental, Health &amp; Safety management across all phases of modern construction projects — with a focus on Delhi NCR compliance and global ESG standards.
+    </p>
+    <div class="hero-meta">
+      <span class="meta-tag"><span class="dot dot-green"></span> Environmental Compliance</span>
+      <span class="meta-tag"><span class="dot dot-rust"></span> Worker Safety</span>
+      <span class="meta-tag"><span class="dot dot-gold"></span> ESG &amp; CSR</span>
+    </div>
+  </div>
+  <div class="scroll-hint">Read on</div>
+</header>
+
+<!-- MAIN -->
+<main>
+  <div class="content-layout">
+
+    <!-- TOC -->
+    <nav class="toc" aria-label="Table of contents">
+      <p class="toc-label">Contents</p>
+      <ul class="toc-list">
+        <li><a href="#s1">1 · Pre-Construction</a></li>
+        <li><a href="#s2">2 · Worker Welfare</a></li>
+        <li><a href="#s3">3 · Environment</a></li>
+        <li><a href="#s4">4 · CSR Integration</a></li>
+        <li><a href="#s5">5 · Waste Management</a></li>
+        <li><a href="#s6">6 · Fire Safety</a></li>
+        <li><a href="#s7">7 · Hazmat</a></li>
+        <li><a href="#s8">8 · Soil Conservation</a></li>
+        <li><a href="#s9">9 · ESG &amp; Carbon</a></li>
+        <li><a href="#s10">10 · Safety Framework</a></li>
+        <li><a href="#s11">11 · Continuous Improvement</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </nav>
+
+    <!-- ARTICLE -->
+    <article>
+      <div class="intro-block">
+        <p>The construction industry is one of the largest contributors to economic growth, yet it simultaneously poses significant challenges in terms of environmental impact, worker safety, and social responsibility. This framework outlines a practical, integrated approach to EHS and sustainable development — from pre-construction through project handover.</p>
+      </div>
+
+      <!-- S1 -->
+      <div class="section" id="s1">
+        <p class="section-number">Section 01</p>
+        <h2 class="section-title">Project Liaisoning &amp; Pre-Construction Planning</h2>
+        <div class="section-body">
+          <p>The foundation of any successful project lies in effective liaisoning and planning. This stage involves securing all statutory approvals, understanding legal obligations, and aligning project execution with environmental and safety regulations.</p>
+          <div class="subsection">
+            <h4>Logistic Plan Framework</h4>
+            <div class="pill-grid">
+              <span class="pill pill-sage">Material Movement Pathways</span>
+              <span class="pill pill-sage">Pedestrian Walkways</span>
+              <span class="pill pill-sage">Controlled Access Gates</span>
+              <span class="pill pill-sage">Traffic Management</span>
+              <span class="pill pill-rust">Visitor &amp; Vehicle Tracking</span>
+              <span class="pill pill-rust">Material Inward/Outward Control</span>
+              <span class="pill pill-rust">Emergency Access Provisions</span>
+            </div>
+          </div>
+          <p style="margin-top:1.2rem">Environmental laws at both central and state levels must be identified and embedded into planning — ensuring compliance is <strong>proactive rather than reactive</strong>.</p>
+        </div>
+      </div>
+
+      <!-- S2 -->
+      <div class="section" id="s2">
+        <p class="section-number">Section 02</p>
+        <h2 class="section-title">Pre-Execution Readiness &amp; Worker Welfare</h2>
+        <div class="section-body">
+          <p>Before commencing construction, establishing proper infrastructure and welfare facilities for workers is not only a legal requirement but also a key indicator of ethical and responsible practice.</p>
+          <div class="card-grid">
+            <div class="card">
+              <div class="card-icon">💧</div>
+              <p class="card-title">Clean Water Supply</p>
+              <p class="card-desc">Provision of potable drinking water at all worker-accessible locations across the site.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">🏠</div>
+              <p class="card-title">Rest &amp; Shelter</p>
+              <p class="card-desc">Adequate shelters, eating areas, and accommodation where applicable.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">🩺</div>
+              <p class="card-title">Medical Support</p>
+              <p class="card-desc">First aid facilities and emergency medical response protocols on-site.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">🚿</div>
+              <p class="card-title">Sanitation</p>
+              <p class="card-desc">Hygienic toilet and wash facilities maintained to health standards throughout the project.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S3 -->
+      <div class="section" id="s3">
+        <p class="section-number">Section 03</p>
+        <h2 class="section-title">Environmental &amp; Sustainability Compliance</h2>
+        <div class="section-body">
+          <p>Modern construction must adopt a sustainability-first approach — minimizing environmental impact while optimizing resource efficiency.</p>
+          <div class="subsection">
+            <h4>Water Management</h4>
+            <p>Installation of Sewage Treatment Plants (STP), water recycling for construction use, and controlled water sourcing to prevent depletion.</p>
+          </div>
+          <div class="subsection">
+            <h4>Dust &amp; Air Pollution Control</h4>
+            <div class="pill-grid">
+              <span class="pill pill-sage">Anti-Smog Guns</span>
+              <span class="pill pill-sage">Dust Separators</span>
+              <span class="pill pill-sage">Water Sprinkling</span>
+              <span class="pill pill-sage">Material Covering</span>
+              <span class="pill pill-sage">Wheel Wash Facilities</span>
+            </div>
+          </div>
+          <div class="subsection">
+            <h4>Renewable Energy</h4>
+            <p>Solar-powered temporary lighting systems significantly reduce dependency on diesel generators, cutting both cost and emissions.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- S4 -->
+      <div class="section" id="s4">
+        <p class="section-number">Section 04</p>
+        <h2 class="section-title">Community &amp; CSR Integration</h2>
+        <div class="section-body">
+          <p>Construction projects must consider their impact on surrounding communities. Corporate Social Responsibility initiatives should be woven into project planning from the outset.</p>
+          <blockquote>
+            <p>"CSR initiatives enhance a project's social acceptance and contribute meaningfully to sustainable urban development."</p>
+          </blockquote>
+          <div class="pill-grid">
+            <span class="pill pill-gold">Tree Plantation Drives</span>
+            <span class="pill pill-gold">Public Area Development</span>
+            <span class="pill pill-gold">Awareness Campaigns</span>
+            <span class="pill pill-gold">Community Engagement</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- S5 -->
+      <div class="section" id="s5">
+        <p class="section-number">Section 05</p>
+        <h2 class="section-title">Waste Management &amp; Resource Optimization</h2>
+        <div class="section-body">
+          <p>Effective waste management is a cornerstone of sustainable construction. All waste streams must be identified, tracked, and responsibly managed.</p>
+          <div class="card-grid">
+            <div class="card">
+              <div class="card-icon">🧱</div>
+              <p class="card-title">C&amp;D Waste</p>
+              <p class="card-desc">Construction and demolition debris segregated, recycled, or disposed via authorized vendors.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">🔩</div>
+              <p class="card-title">Steel Scrap</p>
+              <p class="card-desc">Scrap metal collected and directed to licensed recyclers to recover material value.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">🪵</div>
+              <p class="card-title">Wooden Waste</p>
+              <p class="card-desc">Offcuts and formwork timber reused where possible; remainder disposed responsibly.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">💧</div>
+              <p class="card-title">Water Waste</p>
+              <p class="card-desc">Effluent treated via STP and recycled for non-potable construction uses.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S6 -->
+      <div class="section" id="s6">
+        <p class="section-number">Section 06</p>
+        <h2 class="section-title">Fire Safety &amp; Hazard Management</h2>
+        <div class="section-body">
+          <p>Fire safety during construction is often overlooked despite the presence of flammable materials and temporary electrical setups. GRAP norm compliance is essential in Delhi NCR during high-pollution periods.</p>
+          <div class="subsection">
+            <h4>Key Measures</h4>
+            <div class="pill-grid">
+              <span class="pill pill-rust">Strategic Extinguisher Placement</span>
+              <span class="pill pill-rust">Fire Response Training</span>
+              <span class="pill pill-rust">Safe Chemical Storage</span>
+              <span class="pill pill-rust">Electrical System Audits</span>
+              <span class="pill pill-rust">GRAP Compliance</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S7 -->
+      <div class="section" id="s7">
+        <p class="section-number">Section 07</p>
+        <h2 class="section-title">Chemical &amp; Hazardous Material Management</h2>
+        <div class="section-body">
+          <p>Handling chemicals safely is crucial to prevent environmental contamination and health hazards across the site and surrounding areas.</p>
+          <div class="subsection">
+            <h4>Best Practices</h4>
+            <div class="pill-grid">
+              <span class="pill pill-rust">MSDS Labeling &amp; Storage</span>
+              <span class="pill pill-rust">Secondary Containment</span>
+              <span class="pill pill-rust">Spill Response Plans</span>
+              <span class="pill pill-rust">Safe Handling Training</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S8 -->
+      <div class="section" id="s8">
+        <p class="section-number">Section 08</p>
+        <h2 class="section-title">Soil Conservation &amp; Natural Resource Protection</h2>
+        <div class="section-body">
+          <p>Construction activities often disturb natural soil conditions. Preserving soil integrity and preventing erosion are essential environmental obligations.</p>
+          <div class="pill-grid">
+            <span class="pill pill-sage">Controlled Excavation</span>
+            <span class="pill pill-sage">Retaining Structures</span>
+            <span class="pill pill-sage">Excavated Soil Reuse</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- S9 -->
+      <div class="section" id="s9">
+        <p class="section-number">Section 09</p>
+        <h2 class="section-title">ESG Compliance &amp; Carbon Footprint Reduction</h2>
+        <div class="section-body">
+          <p>ESG principles are becoming increasingly central to construction project evaluation, financing, and social license to operate.</p>
+          <div class="card-grid">
+            <div class="card">
+              <div class="card-icon">🌿</div>
+              <p class="card-title">Efficient Materials</p>
+              <p class="card-desc">Precise material planning and green alternatives to reduce embodied carbon.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">⚙️</div>
+              <p class="card-title">Low-Emission Machinery</p>
+              <p class="card-desc">Preference for BS-VI compliant or electric plant and equipment on-site.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">🚛</div>
+              <p class="card-title">Transport Optimization</p>
+              <p class="card-desc">Logistics planning to minimize vehicle trips and associated emissions.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">👷</div>
+              <p class="card-title">Worker Well-Being</p>
+              <p class="card-desc">Safe, healthy working conditions as a critical social ESG component.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S10 -->
+      <div class="section" id="s10">
+        <p class="section-number">Section 10</p>
+        <h2 class="section-title">Work Safety Management Framework</h2>
+        <div class="section-body">
+          <p>Safety management must be integrated into every stage of construction. Activity-based risk assessment ensures hazards are identified and mitigated before work begins.</p>
+          <table class="risk-table">
+            <thead>
+              <tr>
+                <th>Activity</th>
+                <th>Key Hazard</th>
+                <th>Risk Level</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Excavation</td>
+                <td>Cave-ins, utility damage</td>
+                <td><span class="risk-level risk-high">High</span></td>
+              </tr>
+              <tr>
+                <td>Work at Height</td>
+                <td>Falls from elevation</td>
+                <td><span class="risk-level risk-high">High</span></td>
+              </tr>
+              <tr>
+                <td>RCC Work</td>
+                <td>Formwork instability</td>
+                <td><span class="risk-level risk-med">Medium</span></td>
+              </tr>
+              <tr>
+                <td>MEP Work</td>
+                <td>Electrical hazards</td>
+                <td><span class="risk-level risk-high">High</span></td>
+              </tr>
+              <tr>
+                <td>Finishing Work</td>
+                <td>Chemical exposure</td>
+                <td><span class="risk-level risk-med">Medium</span></td>
+              </tr>
+              <tr>
+                <td>Structural Steel &amp; Façade</td>
+                <td>Lifting &amp; rigging risks</td>
+                <td><span class="risk-level risk-high">High</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="subsection" style="margin-top:1.5rem">
+            <h4>Training Need Analysis (TNA)</h4>
+            <p style="font-size:0.88rem;line-height:1.7;color:rgba(26,26,24,0.72)">Identifying skill gaps and conducting targeted safety training programs ensures that the right personnel are equipped for each activity's unique risk profile.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- S11 -->
+      <div class="section" id="s11">
+        <p class="section-number">Section 11</p>
+        <h2 class="section-title">Awareness &amp; Continuous Improvement</h2>
+        <div class="section-body">
+          <p>Maintaining high EHS standards requires a culture of continuous learning, not just periodic compliance checks.</p>
+          <div class="pill-grid">
+            <span class="pill pill-sage">Daily Toolbox Talks</span>
+            <span class="pill pill-sage">Weekly Safety Meetings</span>
+            <span class="pill pill-sage">Monthly Audits</span>
+            <span class="pill pill-gold">Feedback Mechanisms</span>
+            <span class="pill pill-gold">Improvement Tracking</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONCLUSION -->
+      <div class="section visible" id="conclusion">
+        <div class="conclusion">
+          <div class="conclusion-inner">
+            <h2>Building a <em>Safer,</em><br>Responsible Future</h2>
+            <p>The integration of Environmental, Health, and Safety practices with sustainable development principles is no longer optional — it is a necessity for modern construction projects.</p>
+            <p>A well-structured framework that includes legal compliance, environmental protection, worker welfare, and safety management ensures not only regulatory adherence but also long-term project success.</p>
+            <p>By adopting proactive planning, leveraging sustainable technologies, and fostering a culture of safety and responsibility, construction projects can significantly reduce their environmental footprint while enhancing productivity and stakeholder trust.</p>
+            <div class="conclusion-quote">
+              <p>"Sustainable construction is about building not just structures, but a safer, healthier, and more responsible future."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </article>
+  </div>
+</main>
+
+<footer>
+  <p>Integrated EHS &amp; Sustainable Development Framework · Construction Industry Thesis · 2025</p>
+</footer>
+
+<script>
+  // Intersection observer for scroll animations
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08 });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Active TOC highlighting
+  const tocLinks = document.querySelectorAll('.toc-list a');
+  const sectionEls = document.querySelectorAll('.section[id]');
+
+  const tocObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocLinks.forEach(link => link.classList.remove('active'));
+        const active = document.querySelector(`.toc-list a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sectionEls.forEach(s => tocObserver.observe(s));
+</script>
+</body>
+</html>
