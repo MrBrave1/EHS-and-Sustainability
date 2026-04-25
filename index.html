@@ -4,95 +4,93 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EHS & Sustainable Development | Construction Framework</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,300;1,700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ink: #1a1a18;
-      --paper: #f5f0e8;
-      --sage: #5c7a5c;
-      --sage-light: #8aab8a;
-      --sage-pale: #d6e8d6;
-      --rust: #b85c38;
-      --rust-light: #e8845e;
-      --gold: #c9a84c;
-      --cream: #faf7f0;
-      --border: rgba(26,26,24,0.12);
+      --forest:    #1a3a2a;
+      --forest-mid:#2d5a3d;
+      --leaf:      #3d8b5e;
+      --mint:      #5cb87a;
+      --lime:      #8fd4a0;
+      --pale:      #e8f5ec;
+      --cream:     #f2f8f4;
+      --paper:     #f7faf8;
+      --ink:       #0d2018;
+      --gold:      #b8a040;
+      --gold-pale: #f5f0d8;
+      --border:    rgba(26,58,42,0.14);
+      --border-mid:rgba(26,58,42,0.22);
+      --shadow:    0 4px 24px rgba(13,32,24,0.10);
+      --shadow-lg: 0 12px 48px rgba(13,32,24,0.16);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Outfit', sans-serif;
       background-color: var(--paper);
       color: var(--ink);
       overflow-x: hidden;
     }
 
-    /* NOISE TEXTURE OVERLAY */
+    /* NOISE OVERLAY */
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 1000;
-      opacity: 0.6;
+      content:'';
+      position:fixed;
+      inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events:none;
+      z-index:9999;
     }
 
-    /* HEADER */
+    /* ──────── HEADER ──────── */
     header {
       position: relative;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 6rem 2rem 4rem;
+      padding: 6rem 2rem 5rem;
       overflow: hidden;
-      border-bottom: 1px solid var(--border);
+      background: var(--forest);
     }
 
-    header::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--sage), var(--gold), var(--sage), transparent);
+    .hdr-orbs {
+      position: absolute; inset: 0; pointer-events: none;
     }
-
-    .header-bg {
+    .hdr-orbs span {
       position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 70% 60% at 80% 20%, rgba(92,122,92,0.13) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 70% at 10% 80%, rgba(201,168,76,0.09) 0%, transparent 55%),
-        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(184,92,56,0.05) 0%, transparent 50%);
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.35;
     }
+    .hdr-orbs span:nth-child(1){ width:620px;height:620px;background:var(--forest-mid);top:-120px;right:-150px; }
+    .hdr-orbs span:nth-child(2){ width:400px;height:400px;background:var(--leaf);bottom:-100px;left:-80px;opacity:0.2; }
+    .hdr-orbs span:nth-child(3){ width:220px;height:220px;background:var(--gold);top:40%;left:55%;opacity:0.12; }
 
-    .header-grid {
-      position: absolute;
-      inset: 0;
+    .hdr-grid {
+      position: absolute; inset: 0;
       background-image:
-        linear-gradient(rgba(26,26,24,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(26,26,24,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
+        linear-gradient(rgba(93,184,122,0.06) 1px, transparent 1px),
+        linear-gradient(90deg,rgba(93,184,122,0.06) 1px, transparent 1px);
+      background-size: 64px 64px;
     }
 
-    .header-inner {
+    .hdr-inner {
       position: relative;
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       width: 100%;
     }
 
     .eyebrow {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.22em;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: var(--sage);
+      color: var(--mint);
       margin-bottom: 2rem;
       display: flex;
       align-items: center;
@@ -100,76 +98,84 @@
       opacity: 0;
       animation: fadeUp 0.8s ease forwards 0.2s;
     }
-
     .eyebrow::before {
-      content: '';
-      display: block;
-      width: 32px;
-      height: 1px;
-      background: var(--sage);
+      content:'';
+      width:36px; height:1px;
+      background: linear-gradient(90deg, var(--mint), transparent);
     }
 
     .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 7vw, 6rem);
-      line-height: 1.05;
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.8rem, 7vw, 6.2rem);
+      line-height: 1.04;
       font-weight: 900;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.025em;
+      color: var(--paper);
       opacity: 0;
-      animation: fadeUp 0.9s ease forwards 0.4s;
+      animation: fadeUp 0.9s ease forwards 0.35s;
     }
+    .hero-title em   { font-style: italic; color: var(--lime); }
+    .hero-title mark { background: none; color: var(--gold); }
 
-    .hero-title em {
-      font-style: italic;
-      color: var(--sage);
-    }
-
-    .hero-title .accent {
-      color: var(--rust);
-    }
-
-    .hero-subtitle {
+    .hero-sub {
       margin-top: 2rem;
       font-size: 1.05rem;
       font-weight: 300;
-      line-height: 1.7;
-      max-width: 580px;
-      color: rgba(26,26,24,0.72);
+      line-height: 1.75;
+      max-width: 560px;
+      color: rgba(242,248,244,0.62);
       opacity: 0;
-      animation: fadeUp 0.9s ease forwards 0.6s;
+      animation: fadeUp 0.9s ease forwards 0.55s;
     }
 
-    .hero-meta {
-      margin-top: 3rem;
+    .hero-tags {
+      margin-top: 2.8rem;
       display: flex;
-      align-items: center;
-      gap: 2rem;
       flex-wrap: wrap;
+      gap: 0.8rem;
       opacity: 0;
-      animation: fadeUp 0.9s ease forwards 0.8s;
+      animation: fadeUp 0.9s ease forwards 0.75s;
     }
-
-    .meta-tag {
+    .htag {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      padding: 0.4rem 0.9rem;
-      border: 1px solid var(--border);
+      gap: 0.45rem;
+      padding: 0.42rem 1rem;
+      border: 1px solid rgba(93,184,122,0.28);
       border-radius: 100px;
       font-size: 0.78rem;
       font-weight: 500;
-      background: rgba(255,255,255,0.5);
-      backdrop-filter: blur(4px);
+      color: var(--lime);
+      background: rgba(93,184,122,0.08);
+      backdrop-filter: blur(6px);
     }
+    .htag svg { width:14px;height:14px;opacity:0.8; }
 
-    .meta-tag .dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
+    /* STATS ROW */
+    .stats-row {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3.5rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.95s;
     }
-
-    .dot-green { background: var(--sage); }
-    .dot-rust { background: var(--rust); }
-    .dot-gold { background: var(--gold); }
+    .stat { display: flex; flex-direction: column; gap: 0.2rem; }
+    .stat-num {
+      font-family: 'Fraunces', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--lime);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.76rem;
+      font-weight: 500;
+      color: rgba(242,248,244,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-family: 'JetBrains Mono', monospace;
+    }
 
     .scroll-hint {
       position: absolute;
@@ -179,336 +185,582 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.5rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(26,26,24,0.4);
-      animation: fadeIn 1s ease forwards 1.2s, bounce 2s ease infinite 2s;
+      gap: 0.6rem;
       opacity: 0;
+      animation: fadeIn 1s ease forwards 1.4s;
+    }
+    .scroll-hint span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(93,184,122,0.5);
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(var(--mint), transparent);
+      animation: scrollPulse 2s ease infinite 2s;
     }
 
-    .scroll-hint::after {
-      content: '';
-      display: block;
-      width: 1px;
-      height: 32px;
-      background: linear-gradient(var(--sage), transparent);
+    /* PROGRESS BAR */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--leaf), var(--lime), var(--gold));
+      width: 0%;
+      z-index: 500;
+      transition: width 0.1s linear;
     }
 
-    /* MAIN CONTENT */
+    /* NAV */
+    nav.topnav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 400;
+      background: rgba(13,32,24,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(93,184,122,0.14);
+      padding: 0.8rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transform: translateY(-100%);
+      transition: transform 0.4s ease;
+    }
+    nav.topnav.visible { transform: translateY(0); }
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--lime);
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.4rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: rgba(242,248,244,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--lime); }
+
+    /* MAIN LAYOUT */
     main {
-      max-width: 1100px;
+      max-width: 1140px;
       margin: 0 auto;
       padding: 0 2rem;
     }
 
-    /* TOC SIDEBAR LAYOUT */
     .content-layout {
       display: grid;
-      grid-template-columns: 220px 1fr;
+      grid-template-columns: 230px 1fr;
       gap: 4rem;
+      padding: 5rem 0 4rem;
       align-items: start;
-      padding: 5rem 0;
     }
 
     /* STICKY TOC */
     .toc {
       position: sticky;
-      top: 2rem;
+      top: 5.5rem;
     }
-
     .toc-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--sage);
-      margin-bottom: 1.2rem;
-    }
-
-    .toc-list {
-      list-style: none;
+      color: var(--leaf);
+      margin-bottom: 1rem;
       display: flex;
-      flex-direction: column;
-      gap: 0.1rem;
+      align-items: center;
+      gap: 0.6rem;
     }
-
+    .toc-label::after { content:''; flex:1; height:1px; background:var(--border); }
+    .toc-list { list-style: none; }
+    .toc-list li { border-left: 2px solid var(--border); }
     .toc-list li a {
       display: block;
-      padding: 0.42rem 0.7rem;
-      font-size: 0.8rem;
-      font-weight: 400;
-      color: rgba(26,26,24,0.55);
+      padding: 0.38rem 0.8rem;
+      font-size: 0.79rem;
+      color: rgba(13,32,24,0.5);
       text-decoration: none;
-      border-left: 2px solid transparent;
       transition: all 0.2s ease;
       line-height: 1.4;
     }
-
     .toc-list li a:hover,
-    .toc-list li a.active {
-      color: var(--ink);
-      border-left-color: var(--sage);
-      background: rgba(92,122,92,0.06);
-      padding-left: 1rem;
+    .toc-list li.active a {
+      color: var(--forest-mid);
+      border-left: 2px solid var(--leaf);
+      margin-left: -2px;
+      background: rgba(61,139,94,0.06);
+      padding-left: 1.1rem;
     }
 
-    /* ARTICLE */
-    article { max-width: 680px; }
-
-    /* INTRO BLOCK */
-    .intro-block {
-      padding: 2.5rem;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      background: var(--cream);
-      margin-bottom: 4rem;
+    /* INTRO BANNER */
+    .intro-banner {
+      padding: 2.2rem 2.5rem;
+      background: var(--forest);
+      border-radius: 8px;
+      margin-bottom: 3.5rem;
       position: relative;
       overflow: hidden;
     }
-
-    .intro-block::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 4px; height: 100%;
-      background: linear-gradient(180deg, var(--sage), var(--gold));
+    .intro-banner::before {
+      content:'';
+      position:absolute;
+      top:0;left:0;
+      width:100%;height:4px;
+      background: linear-gradient(90deg, var(--leaf), var(--mint), var(--gold));
     }
-
-    .intro-block p {
-      font-size: 1.05rem;
+    .intro-banner p {
+      font-size: 1.02rem;
       line-height: 1.8;
-      color: rgba(26,26,24,0.82);
+      color: rgba(242,248,244,0.75);
     }
 
-    /* SECTIONS */
+    /* ──────── SECTION ──────── */
     .section {
-      margin-bottom: 5rem;
+      margin-bottom: 4.5rem;
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
     }
+    .section.visible { opacity: 1; transform: translateY(0); }
 
-    .section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .section-number {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.15em;
-      color: var(--rust);
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.7rem;
-      font-weight: 700;
-      line-height: 1.25;
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
       margin-bottom: 1.5rem;
       padding-bottom: 1rem;
       border-bottom: 1px solid var(--border);
+    }
+    .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--leaf);
+      background: var(--pale);
+      padding: 0.3rem 0.65rem;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1.22;
+      color: var(--forest);
     }
 
     .section-body {
       font-size: 0.95rem;
       line-height: 1.85;
-      color: rgba(26,26,24,0.78);
+      color: rgba(13,32,24,0.72);
     }
+    .section-body p { margin-bottom: 1rem; }
 
-    .section-body p { margin-bottom: 1.1rem; }
+    /* ──────── ACCORDION ──────── */
+    .accordion { margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem; }
 
-    /* SUBSECTION */
-    .subsection {
-      margin-top: 2rem;
-      padding: 1.8rem;
-      background: var(--cream);
+    .acc-item {
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: 6px;
+      overflow: hidden;
+      background: white;
+      transition: box-shadow 0.25s ease;
     }
+    .acc-item:hover { box-shadow: var(--shadow); }
+    .acc-item.open   { box-shadow: var(--shadow); border-color: var(--mint); }
 
-    .subsection h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: var(--ink);
-    }
-
-    /* PILL GRID */
-    .pill-grid {
+    .acc-trigger {
+      width: 100%;
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.8rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 1.4rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      text-align: left;
+      gap: 1rem;
+      transition: background 0.2s;
+    }
+    .acc-trigger:hover { background: var(--pale); }
+    .acc-item.open .acc-trigger { background: rgba(61,139,94,0.06); }
+
+    .acc-trigger-left {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+    .acc-icon-wrap {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--pale);
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .acc-item.open .acc-icon-wrap { background: var(--forest); }
+
+    .acc-title {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--forest);
+    }
+    .acc-subtitle {
+      font-size: 0.76rem;
+      color: rgba(13,32,24,0.45);
+      margin-top: 0.15rem;
     }
 
+    .acc-chevron {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--pale);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      transition: transform 0.3s ease, background 0.2s;
+    }
+    .acc-chevron svg { width: 10px; transition: transform 0.3s ease; }
+    .acc-item.open .acc-chevron { background: var(--mint); transform: none; }
+    .acc-item.open .acc-chevron svg { transform: rotate(180deg); }
+
+    .acc-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .acc-body-inner {
+      padding: 0 1.4rem 1.4rem;
+      font-size: 0.875rem;
+      line-height: 1.78;
+      color: rgba(13,32,24,0.7);
+      border-top: 1px solid var(--border);
+    }
+    .acc-body-inner p { margin-top: 0.9rem; }
+
+    /* ──────── PILL GRID ──────── */
+    .pill-grid { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.8rem; }
     .pill {
-      padding: 0.35rem 0.85rem;
+      padding: 0.3rem 0.85rem;
       border-radius: 100px;
-      font-size: 0.8rem;
+      font-size: 0.76rem;
       font-weight: 500;
       border: 1px solid;
     }
+    .pill-g { border-color: rgba(93,184,122,0.4); color: var(--forest-mid); background: var(--pale); }
+    .pill-d { border-color: rgba(26,58,42,0.2); color: var(--forest); background: var(--cream); }
+    .pill-gold { border-color: rgba(184,160,64,0.3); color: #6b5800; background: var(--gold-pale); }
 
-    .pill-sage { border-color: var(--sage-light); color: var(--sage); background: var(--sage-pale); }
-    .pill-rust { border-color: #e8b4a0; color: var(--rust); background: #fdf0eb; }
-    .pill-gold { border-color: #e0cfa0; color: #7a6020; background: #fdf8ec; }
-
-    /* FEATURE CARDS */
+    /* ──────── CARDS ──────── */
     .card-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-top: 1.5rem;
+      gap: 0.9rem;
+      margin-top: 1.2rem;
     }
-
     .card {
-      padding: 1.4rem;
+      padding: 1.3rem;
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: 8px;
       background: white;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      cursor: default;
     }
-
     .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--mint);
     }
+    .card-icon { font-size: 1.5rem; margin-bottom: 0.6rem; }
+    .card-title { font-weight: 600; font-size: 0.9rem; color: var(--forest); margin-bottom: 0.35rem; }
+    .card-desc { font-size: 0.8rem; line-height: 1.62; color: rgba(13,32,24,0.58); }
 
-    .card-icon {
-      font-size: 1.5rem;
-      margin-bottom: 0.7rem;
-    }
-
-    .card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.4rem;
-    }
-
-    .card-desc {
-      font-size: 0.82rem;
-      line-height: 1.6;
-      color: rgba(26,26,24,0.62);
-    }
-
-    /* BLOCKQUOTE */
-    blockquote {
-      margin: 2rem 0;
-      padding: 1.8rem 2rem;
-      border-left: 3px solid var(--gold);
-      background: linear-gradient(135deg, rgba(201,168,76,0.05), transparent);
-      border-radius: 0 4px 4px 0;
-    }
-
-    blockquote p {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.18rem;
-      font-style: italic;
-      line-height: 1.6;
-      color: var(--ink);
-    }
-
-    /* TABLE */
+    /* ──────── RISK TABLE ──────── */
     .risk-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1.2rem;
-      font-size: 0.83rem;
+      margin-top: 1rem;
+      font-size: 0.82rem;
+      border-radius: 6px;
+      overflow: hidden;
     }
-
     .risk-table th {
-      background: var(--ink);
-      color: var(--paper);
-      padding: 0.7rem 1rem;
+      background: var(--forest);
+      color: var(--lime);
+      padding: 0.65rem 1rem;
       text-align: left;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.67rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
     }
-
     .risk-table td {
-      padding: 0.7rem 1rem;
+      padding: 0.65rem 1rem;
       border-bottom: 1px solid var(--border);
-      line-height: 1.5;
+      vertical-align: middle;
+    }
+    .risk-table tr:last-child td { border-bottom: none; }
+    .risk-table tr:nth-child(even) td { background: var(--pale); }
+    .risk-table tr { transition: background 0.15s; }
+    .risk-table tbody tr:hover td { background: rgba(93,184,122,0.12); }
+
+    .rl { display:inline-block; padding:0.22rem 0.65rem; border-radius:100px; font-size:0.7rem; font-weight:600; }
+    .rl-h { background:#fdecea; color:#b71c1c; }
+    .rl-m { background:#fff8e1; color:#e65100; }
+    .rl-l { background:var(--pale); color:var(--forest-mid); }
+
+    /* ──────── BLOCKQUOTE ──────── */
+    blockquote {
+      margin: 1.8rem 0;
+      padding: 1.6rem 1.8rem;
+      border-left: 3px solid var(--mint);
+      background: linear-gradient(135deg, rgba(93,184,122,0.06), transparent);
+      border-radius: 0 6px 6px 0;
+    }
+    blockquote p {
+      font-family: 'Fraunces', serif;
+      font-size: 1.12rem;
+      font-style: italic;
+      line-height: 1.65;
+      color: var(--forest);
     }
 
-    .risk-table tr:nth-child(even) td { background: var(--cream); }
-
-    .risk-level {
-      display: inline-block;
-      padding: 0.2rem 0.6rem;
-      border-radius: 100px;
+    /* ──────── INTERACTIVE CHECKLIST ──────── */
+    .checklist { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .cl-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.18s, border-color 0.18s;
+      background: white;
+      user-select: none;
+    }
+    .cl-item:hover { background: var(--pale); border-color: var(--mint); }
+    .cl-item.checked { background: var(--pale); border-color: var(--leaf); }
+    .cl-box {
+      width: 20px; height: 20px;
+      border-radius: 5px;
+      border: 2px solid var(--border-mid);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .cl-item.checked .cl-box { background: var(--leaf); border-color: var(--leaf); }
+    .cl-box svg { display: none; width: 11px; fill: white; }
+    .cl-item.checked .cl-box svg { display: block; }
+    .cl-text { font-size: 0.87rem; color: rgba(13,32,24,0.78); font-weight: 500; }
+    .cl-item.checked .cl-text { color: var(--forest-mid); }
+    .cl-progress {
+      margin-bottom: 0.8rem;
+      height: 5px;
+      background: var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .cl-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--leaf), var(--mint));
+      border-radius: 10px;
+      transition: width 0.35s ease;
+      width: 0%;
+    }
+    .cl-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .cl-score {
+      font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem;
+      color: var(--leaf);
       font-weight: 500;
     }
 
-    .risk-high { background: #fdecea; color: #c62828; }
-    .risk-med { background: #fff8e1; color: #f57c00; }
-    .risk-low { background: var(--sage-pale); color: var(--sage); }
+    /* ──────── TABS ──────── */
+    .tabs { margin-top: 1.2rem; }
+    .tab-nav {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 0;
+    }
+    .tab-btn {
+      padding: 0.65rem 1.1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(13,32,24,0.45);
+      cursor: pointer;
+      border: none;
+      background: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .tab-btn:hover  { color: var(--forest-mid); }
+    .tab-btn.active { color: var(--forest); border-bottom-color: var(--leaf); }
+    .tab-panel {
+      display: none;
+      padding: 1.4rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 6px 6px;
+      font-size: 0.875rem;
+      line-height: 1.8;
+      color: rgba(13,32,24,0.72);
+    }
+    .tab-panel.active { display: block; }
 
-    /* CONCLUSION */
+    /* ──────── TIMELINE ──────── */
+    .timeline { margin-top: 1.2rem; position: relative; padding-left: 2.4rem; }
+    .timeline::before {
+      content:'';
+      position: absolute;
+      left: 9px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--leaf), transparent);
+    }
+    .tl-item {
+      position: relative;
+      padding-bottom: 1.6rem;
+      cursor: pointer;
+    }
+    .tl-item::before {
+      content:'';
+      position: absolute;
+      left: -28px; top: 5px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--leaf);
+      border: 2px solid var(--paper);
+      box-shadow: 0 0 0 3px rgba(61,139,94,0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .tl-item:hover::before { transform: scale(1.3); box-shadow: 0 0 0 5px rgba(61,139,94,0.15); }
+    .tl-phase {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--leaf);
+      margin-bottom: 0.3rem;
+    }
+    .tl-heading {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--forest);
+      margin-bottom: 0.3rem;
+    }
+    .tl-detail {
+      font-size: 0.82rem;
+      color: rgba(13,32,24,0.58);
+      line-height: 1.65;
+    }
+
+    /* ──────── KPI STRIP ──────── */
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+    .kpi-cell {
+      background: white;
+      padding: 1.2rem 1rem;
+      text-align: center;
+      transition: background 0.2s;
+      cursor: default;
+    }
+    .kpi-cell:hover { background: var(--pale); }
+    .kpi-num {
+      font-family: 'Fraunces', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--forest-mid);
+      line-height: 1;
+    }
+    .kpi-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: rgba(13,32,24,0.45);
+      margin-top: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ──────── CONCLUSION ──────── */
     .conclusion {
-      background: var(--ink);
+      background: var(--forest);
       color: var(--paper);
       padding: 4rem;
       margin: 0 -2rem;
-      border-radius: 4px;
+      border-radius: 8px;
       position: relative;
       overflow: hidden;
     }
-
     .conclusion::before {
-      content: '';
-      position: absolute;
-      inset: 0;
+      content:'';
+      position:absolute; inset:0;
       background:
-        radial-gradient(ellipse 60% 80% at 90% 10%, rgba(92,122,92,0.25) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 60% at 5% 90%, rgba(201,168,76,0.15) 0%, transparent 50%);
+        radial-gradient(ellipse 60% 70% at 95% 5%, rgba(93,184,122,0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 5% 95%, rgba(184,160,64,0.14) 0%, transparent 55%);
     }
-
+    .conclusion::after {
+      content:'';
+      position:absolute;
+      top:0;left:0;right:0;
+      height:3px;
+      background: linear-gradient(90deg, var(--leaf), var(--mint), var(--gold));
+    }
     .conclusion-inner { position: relative; }
-
     .conclusion h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
+      font-family: 'Fraunces', serif;
+      font-size: 2.4rem;
       font-weight: 900;
       margin-bottom: 1.5rem;
       color: var(--paper);
     }
-
-    .conclusion h2 em {
-      font-style: italic;
-      color: var(--sage-light);
-    }
-
+    .conclusion h2 em { font-style: italic; color: var(--lime); }
     .conclusion p {
-      font-size: 0.97rem;
-      line-height: 1.8;
-      color: rgba(245,240,232,0.75);
+      font-size: 0.96rem;
+      line-height: 1.82;
+      color: rgba(242,248,244,0.68);
       max-width: 580px;
       margin-bottom: 1rem;
     }
-
     .conclusion-quote {
       margin-top: 2rem;
-      padding: 1.5rem;
-      border: 1px solid rgba(201,168,76,0.3);
-      border-radius: 4px;
-      background: rgba(201,168,76,0.08);
+      padding: 1.5rem 1.8rem;
+      border: 1px solid rgba(184,160,64,0.28);
+      border-radius: 6px;
+      background: rgba(184,160,64,0.08);
     }
-
     .conclusion-quote p {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
+      font-family: 'Fraunces', serif;
+      font-size: 1.08rem;
       font-style: italic;
       color: var(--gold);
       margin: 0;
@@ -517,79 +769,114 @@
     /* FOOTER */
     footer {
       text-align: center;
-      padding: 3rem 2rem;
+      padding: 2.5rem 2rem;
       border-top: 1px solid var(--border);
-      margin-top: 6rem;
+      margin-top: 5rem;
     }
-
     footer p {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
       letter-spacing: 0.12em;
-      color: rgba(26,26,24,0.4);
+      color: rgba(13,32,24,0.35);
     }
 
     /* ANIMATIONS */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
     }
-
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
+      from { opacity:0; }
+      to   { opacity:1; }
     }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(6px); }
+    @keyframes scrollPulse {
+      0%,100% { opacity:1; }
+      50%      { opacity:0.3; }
     }
 
     /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .content-layout {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 800px) {
+      .content-layout { grid-template-columns: 1fr; }
       .toc { display: none; }
       .card-grid { grid-template-columns: 1fr; }
+      .kpi-strip { grid-template-columns: 1fr 1fr; }
       .conclusion { padding: 2.5rem 1.5rem; margin: 0; }
-      header { padding: 5rem 1.5rem 3rem; }
+      header { padding: 5rem 1.5rem 4rem; }
+      nav.topnav { display: none; }
     }
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
+<div id="progress-bar"></div>
+
+<!-- TOP NAV (slides in after scroll) -->
+<nav class="topnav" id="topnav" aria-label="Site navigation">
+  <span class="nav-logo">EHS Framework</span>
+  <ul class="nav-links">
+    <li><a href="#s1">Pre-Construction</a></li>
+    <li><a href="#s3">Environment</a></li>
+    <li><a href="#s10">Safety</a></li>
+    <li><a href="#s9">ESG</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+
+<!-- ──────── HEADER ──────── -->
 <header>
-  <div class="header-bg"></div>
-  <div class="header-grid"></div>
-  <div class="header-inner">
-    <p class="eyebrow">Construction Industry Thesis · 2025</p>
+  <div class="hdr-orbs">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="hdr-grid"></div>
+  <div class="hdr-inner">
+    <p class="eyebrow">Construction Industry Framework · 2025</p>
     <h1 class="hero-title">
       Integrated <em>EHS</em> &amp;<br>
-      <span class="accent">Sustainable</span><br>
+      <mark>Sustainable</mark><br>
       Development
     </h1>
-    <p class="hero-subtitle">
-      A structured framework for achieving excellence in Environmental, Health &amp; Safety management across all phases of modern construction projects — with a focus on Delhi NCR compliance and global ESG standards.
+    <p class="hero-sub">
+      A structured, actionable framework for Environmental, Health &amp; Safety excellence across all phases of modern construction — aligned with Delhi NCR compliance and global ESG standards.
     </p>
-    <div class="hero-meta">
-      <span class="meta-tag"><span class="dot dot-green"></span> Environmental Compliance</span>
-      <span class="meta-tag"><span class="dot dot-rust"></span> Worker Safety</span>
-      <span class="meta-tag"><span class="dot dot-gold"></span> ESG &amp; CSR</span>
+    <div class="hero-tags">
+      <span class="htag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Environmental Compliance
+      </span>
+      <span class="htag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        Worker Safety
+      </span>
+      <span class="htag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        ESG &amp; CSR
+      </span>
+      <span class="htag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Continuous Improvement
+      </span>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><span class="stat-num">11</span><span class="stat-label">Core Sections</span></div>
+      <div class="stat"><span class="stat-num">40+</span><span class="stat-label">EHS Controls</span></div>
+      <div class="stat"><span class="stat-num">100%</span><span class="stat-label">GRAP Aligned</span></div>
+      <div class="stat"><span class="stat-num">ESG</span><span class="stat-label">Framework Ready</span></div>
     </div>
   </div>
-  <div class="scroll-hint">Read on</div>
+  <div class="scroll-hint">
+    <span>Scroll to explore</span>
+    <div class="scroll-line"></div>
+  </div>
 </header>
 
-<!-- MAIN -->
+<!-- ──────── MAIN ──────── -->
 <main>
   <div class="content-layout">
 
-    <!-- TOC -->
+    <!-- STICKY TOC -->
     <nav class="toc" aria-label="Table of contents">
       <p class="toc-label">Contents</p>
-      <ul class="toc-list">
+      <ul class="toc-list" id="toc-list">
         <li><a href="#s1">1 · Pre-Construction</a></li>
         <li><a href="#s2">2 · Worker Welfare</a></li>
         <li><a href="#s3">3 · Environment</a></li>
@@ -600,299 +887,685 @@
         <li><a href="#s8">8 · Soil Conservation</a></li>
         <li><a href="#s9">9 · ESG &amp; Carbon</a></li>
         <li><a href="#s10">10 · Safety Framework</a></li>
-        <li><a href="#s11">11 · Continuous Improvement</a></li>
+        <li><a href="#s11">11 · Improvement</a></li>
         <li><a href="#conclusion">Conclusion</a></li>
       </ul>
     </nav>
 
     <!-- ARTICLE -->
     <article>
-      <div class="intro-block">
+
+      <div class="intro-banner">
         <p>The construction industry is one of the largest contributors to economic growth, yet it simultaneously poses significant challenges in terms of environmental impact, worker safety, and social responsibility. This framework outlines a practical, integrated approach to EHS and sustainable development — from pre-construction through project handover.</p>
       </div>
 
-      <!-- S1 -->
+      <!-- KPI STRIP -->
+      <div class="kpi-strip">
+        <div class="kpi-cell"><div class="kpi-num">Zero</div><div class="kpi-label">Fatality Target</div></div>
+        <div class="kpi-cell"><div class="kpi-num">30%</div><div class="kpi-label">Dust Reduction</div></div>
+        <div class="kpi-cell"><div class="kpi-num">80%</div><div class="kpi-label">Waste Recycled</div></div>
+        <div class="kpi-cell"><div class="kpi-num">Solar</div><div class="kpi-label">Site Lighting</div></div>
+      </div>
+
+      <!-- ── S1 ── -->
       <div class="section" id="s1">
-        <p class="section-number">Section 01</p>
-        <h2 class="section-title">Project Liaisoning &amp; Pre-Construction Planning</h2>
+        <div class="section-header">
+          <span class="section-num">Section 01</span>
+          <h2 class="section-title">Project Liaisoning &amp; Pre-Construction Planning</h2>
+        </div>
         <div class="section-body">
           <p>The foundation of any successful project lies in effective liaisoning and planning. This stage involves securing all statutory approvals, understanding legal obligations, and aligning project execution with environmental and safety regulations.</p>
-          <div class="subsection">
-            <h4>Logistic Plan Framework</h4>
-            <div class="pill-grid">
-              <span class="pill pill-sage">Material Movement Pathways</span>
-              <span class="pill pill-sage">Pedestrian Walkways</span>
-              <span class="pill pill-sage">Controlled Access Gates</span>
-              <span class="pill pill-sage">Traffic Management</span>
-              <span class="pill pill-rust">Visitor &amp; Vehicle Tracking</span>
-              <span class="pill pill-rust">Material Inward/Outward Control</span>
-              <span class="pill pill-rust">Emergency Access Provisions</span>
+
+          <!-- ACCORDION -->
+          <div class="accordion">
+
+            <div class="acc-item">
+              <button class="acc-trigger" aria-expanded="false">
+                <div class="acc-trigger-left">
+                  <div class="acc-icon-wrap">🗺️</div>
+                  <div>
+                    <div class="acc-title">Logistic Plan Framework</div>
+                    <div class="acc-subtitle">Site access, traffic &amp; material flow</div>
+                  </div>
+                </div>
+                <div class="acc-chevron"><svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg></div>
+              </button>
+              <div class="acc-body">
+                <div class="acc-body-inner">
+                  <p>A comprehensive logistics plan ensures safe, efficient movement of materials, people, and vehicles across the site.</p>
+                  <div class="pill-grid">
+                    <span class="pill pill-g">Material Movement Pathways</span>
+                    <span class="pill pill-g">Pedestrian Walkways</span>
+                    <span class="pill pill-g">Controlled Access Gates</span>
+                    <span class="pill pill-g">Traffic Management</span>
+                    <span class="pill pill-d">Visitor &amp; Vehicle Tracking</span>
+                    <span class="pill pill-d">Material Inward/Outward Control</span>
+                    <span class="pill pill-d">Emergency Access Provisions</span>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <p style="margin-top:1.2rem">Environmental laws at both central and state levels must be identified and embedded into planning — ensuring compliance is <strong>proactive rather than reactive</strong>.</p>
+
+            <div class="acc-item">
+              <button class="acc-trigger" aria-expanded="false">
+                <div class="acc-trigger-left">
+                  <div class="acc-icon-wrap">📋</div>
+                  <div>
+                    <div class="acc-title">Statutory Approvals Checklist</div>
+                    <div class="acc-subtitle">Track regulatory clearances interactively</div>
+                  </div>
+                </div>
+                <div class="acc-chevron"><svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg></div>
+              </button>
+              <div class="acc-body">
+                <div class="acc-body-inner">
+                  <p>Click each item to mark it complete. Track your approval progress before breaking ground.</p>
+                  <div class="cl-header">
+                    <span style="font-size:0.78rem;font-weight:600;color:var(--forest)">Approval Progress</span>
+                    <span class="cl-score" id="cl1-score">0 / 6 complete</span>
+                  </div>
+                  <div class="cl-progress"><div class="cl-progress-fill" id="cl1-bar"></div></div>
+                  <div class="checklist" data-cl="cl1" data-total="6">
+                    <div class="cl-item" onclick="toggleCheck(this,'cl1',6)">
+                      <div class="cl-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1" stroke="white" stroke-width="2" fill="none"/></svg></div>
+                      <span class="cl-text">Environmental Clearance (EC)</span>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this,'cl1',6)">
+                      <div class="cl-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1" stroke="white" stroke-width="2" fill="none"/></svg></div>
+                      <span class="cl-text">Building Plan Approval (BPA)</span>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this,'cl1',6)">
+                      <div class="cl-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1" stroke="white" stroke-width="2" fill="none"/></svg></div>
+                      <span class="cl-text">Consent to Establish (CTE)</span>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this,'cl1',6)">
+                      <div class="cl-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1" stroke="white" stroke-width="2" fill="none"/></svg></div>
+                      <span class="cl-text">DPCC NOC (Delhi NCR)</span>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this,'cl1',6)">
+                      <div class="cl-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1" stroke="white" stroke-width="2" fill="none"/></svg></div>
+                      <span class="cl-text">Heritage &amp; Tree Clearance</span>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this,'cl1',6)">
+                      <div class="cl-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1" stroke="white" stroke-width="2" fill="none"/></svg></div>
+                      <span class="cl-text">Fire NOC (Pre-Construction)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="acc-item">
+              <button class="acc-trigger" aria-expanded="false">
+                <div class="acc-trigger-left">
+                  <div class="acc-icon-wrap">⚖️</div>
+                  <div>
+                    <div class="acc-title">Legal Compliance Matrix</div>
+                    <div class="acc-subtitle">Central &amp; state-level regulatory alignment</div>
+                  </div>
+                </div>
+                <div class="acc-chevron"><svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg></div>
+              </button>
+              <div class="acc-body">
+                <div class="acc-body-inner">
+                  <p>Environmental laws at both central and state levels must be identified and embedded into planning — ensuring compliance is <strong>proactive rather than reactive</strong>.</p>
+                  <div class="pill-grid" style="margin-top:0.8rem">
+                    <span class="pill pill-g">Environment Protection Act 1986</span>
+                    <span class="pill pill-g">Building &amp; Other Construction Workers Act</span>
+                    <span class="pill pill-g">Factories Act 1948</span>
+                    <span class="pill pill-d">GRAP Notifications</span>
+                    <span class="pill pill-d">NGT Orders</span>
+                    <span class="pill pill-d">Labour Welfare Fund Act</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /accordion -->
         </div>
       </div>
 
-      <!-- S2 -->
+      <!-- ── S2 ── -->
       <div class="section" id="s2">
-        <p class="section-number">Section 02</p>
-        <h2 class="section-title">Pre-Execution Readiness &amp; Worker Welfare</h2>
+        <div class="section-header">
+          <span class="section-num">Section 02</span>
+          <h2 class="section-title">Pre-Execution Readiness &amp; Worker Welfare</h2>
+        </div>
         <div class="section-body">
-          <p>Before commencing construction, establishing proper infrastructure and welfare facilities for workers is not only a legal requirement but also a key indicator of ethical and responsible practice.</p>
+          <p>Before commencing construction, establishing proper welfare facilities for workers is not only a legal requirement but also a key indicator of ethical and responsible practice.</p>
           <div class="card-grid">
             <div class="card">
               <div class="card-icon">💧</div>
               <p class="card-title">Clean Water Supply</p>
-              <p class="card-desc">Provision of potable drinking water at all worker-accessible locations across the site.</p>
+              <p class="card-desc">Provision of potable drinking water at all worker-accessible locations across the site at all times.</p>
             </div>
             <div class="card">
               <div class="card-icon">🏠</div>
               <p class="card-title">Rest &amp; Shelter</p>
-              <p class="card-desc">Adequate shelters, eating areas, and accommodation where applicable.</p>
+              <p class="card-desc">Adequate shelters, eating areas, and accommodation where applicable per BOCW standards.</p>
             </div>
             <div class="card">
               <div class="card-icon">🩺</div>
               <p class="card-title">Medical Support</p>
-              <p class="card-desc">First aid facilities and emergency medical response protocols on-site.</p>
+              <p class="card-desc">First aid facilities and emergency medical response protocols on-site with trained personnel.</p>
             </div>
             <div class="card">
               <div class="card-icon">🚿</div>
               <p class="card-title">Sanitation</p>
-              <p class="card-desc">Hygienic toilet and wash facilities maintained to health standards throughout the project.</p>
+              <p class="card-desc">Hygienic toilet and wash facilities maintained to health standards, with separate amenities for women.</p>
+            </div>
+          </div>
+
+          <div class="accordion" style="margin-top:1.2rem">
+            <div class="acc-item">
+              <button class="acc-trigger" aria-expanded="false">
+                <div class="acc-trigger-left">
+                  <div class="acc-icon-wrap">👷</div>
+                  <div>
+                    <div class="acc-title">Worker Welfare Pre-Start Checklist</div>
+                    <div class="acc-subtitle">Verify all welfare facilities before mobilisation</div>
+                  </div>
+                </div>
+                <div class="acc-chevron"><svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg></div>
+              </button>
+              <div class="acc-body">
+                <div class="acc-body-inner">
+                  <div class="cl-header">
+                    <span style="font-size:0.78rem;font-weight:600;color:var(--forest)">Welfare Readiness</span>
+                    <span class="cl-score" id="cl2-score">0 / 7 complete</span>
+                  </div>
+                  <div class="cl-progress"><div class="cl-progress-fill" id="cl2-bar"></div></div>
+                  <div class="checklist" data-cl="cl2" data-total="7">
+                    <div class="cl-item" onclick="toggleCheck(this,'cl2',7)"><div class="cl-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1" stroke="white" stroke-width="2" fill="none"/></svg></div><span class="cl-text">Potable water source established</span></div>
+                    <div class="cl-item" onclick="toggleCheck(this,'cl2',7)"><div class="cl-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1" stroke="white" stroke-width="2" fill="none"/></svg></div><span class="cl-text">Temporary latrines &amp; urinals erected (1:25 ratio)</span></div>
+                    <div class="cl-item" onclick="toggleCheck(this,'cl2',7)"><div class="cl-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1" stroke="white" stroke-width="2" fill="none"/></svg></div><span class="cl-text">First aid box stocked &amp; assigned custodian</span></div>
+                    <div class="cl-item" onclick="toggleCheck(this,'cl2',7)"><div class="cl-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1" stroke="white" stroke-width="2" fill="none"/></svg></div><span class="cl-text">Rest shed with seating provided</span></div>
+                    <div class="cl-item" onclick="toggleCheck(this,'cl2',7)"><div class="cl-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1" stroke="white" stroke-width="2" fill="none"/></svg></div><span class="cl-text">Emergency contact board displayed</span></div>
+                    <div class="cl-item" onclick="toggleCheck(this,'cl2',7)"><div class="cl-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1" stroke="white" stroke-width="2" fill="none"/></svg></div><span class="cl-text">PPE issued to all workers</span></div>
+                    <div class="cl-item" onclick="toggleCheck(this,'cl2',7)"><div class="cl-box"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1" stroke="white" stroke-width="2" fill="none"/></svg></div><span class="cl-text">Induction training completed</span></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- S3 -->
+      <!-- ── S3 ── -->
       <div class="section" id="s3">
-        <p class="section-number">Section 03</p>
-        <h2 class="section-title">Environmental &amp; Sustainability Compliance</h2>
+        <div class="section-header">
+          <span class="section-num">Section 03</span>
+          <h2 class="section-title">Environmental &amp; Sustainability Compliance</h2>
+        </div>
         <div class="section-body">
           <p>Modern construction must adopt a sustainability-first approach — minimizing environmental impact while optimizing resource efficiency.</p>
-          <div class="subsection">
-            <h4>Water Management</h4>
-            <p>Installation of Sewage Treatment Plants (STP), water recycling for construction use, and controlled water sourcing to prevent depletion.</p>
-          </div>
-          <div class="subsection">
-            <h4>Dust &amp; Air Pollution Control</h4>
-            <div class="pill-grid">
-              <span class="pill pill-sage">Anti-Smog Guns</span>
-              <span class="pill pill-sage">Dust Separators</span>
-              <span class="pill pill-sage">Water Sprinkling</span>
-              <span class="pill pill-sage">Material Covering</span>
-              <span class="pill pill-sage">Wheel Wash Facilities</span>
+
+          <div class="tabs">
+            <div class="tab-nav">
+              <button class="tab-btn active" onclick="switchTab(this,'env-water')">💧 Water</button>
+              <button class="tab-btn" onclick="switchTab(this,'env-air')">🌫️ Air & Dust</button>
+              <button class="tab-btn" onclick="switchTab(this,'env-energy')">☀️ Energy</button>
+              <button class="tab-btn" onclick="switchTab(this,'env-noise')">🔊 Noise</button>
             </div>
-          </div>
-          <div class="subsection">
-            <h4>Renewable Energy</h4>
-            <p>Solar-powered temporary lighting systems significantly reduce dependency on diesel generators, cutting both cost and emissions.</p>
+            <div class="tab-panel active" id="env-water">
+              <p><strong>Sewage Treatment Plants (STP)</strong> must be installed for sites exceeding 20,000 sqm. Water recycling for construction use (curing, dust suppression) is mandatory. Controlled sourcing via tanker logs prevents groundwater depletion. All wastewater discharge points must be monitored with pH strips daily.</p>
+              <div class="pill-grid" style="margin-top:0.8rem">
+                <span class="pill pill-g">STP Installation</span>
+                <span class="pill pill-g">Rainwater Harvesting Pits</span>
+                <span class="pill pill-g">Water Metering</span>
+                <span class="pill pill-d">Zero Discharge Policy</span>
+              </div>
+            </div>
+            <div class="tab-panel" id="env-air">
+              <p>Delhi NCR GRAP norms require strict dust control. Anti-smog guns must operate during peak activity hours. All bare soil areas must be covered with hessian cloth or jute nets. Vehicle wheel wash units are compulsory at exit gates.</p>
+              <div class="pill-grid" style="margin-top:0.8rem">
+                <span class="pill pill-g">Anti-Smog Guns</span>
+                <span class="pill pill-g">Dust Separators</span>
+                <span class="pill pill-g">Water Sprinkling (3x daily)</span>
+                <span class="pill pill-g">Wheel Wash Facility</span>
+                <span class="pill pill-d">Material Covering (tarpaulin)</span>
+                <span class="pill pill-d">Green Net Hoarding</span>
+              </div>
+            </div>
+            <div class="tab-panel" id="env-energy">
+              <p>Solar-powered temporary lighting systems significantly reduce dependency on diesel generators, cutting both cost and emissions. LED lighting across site hoardings and worker areas is standard practice. DG sets must comply with CPCB norms and run on low-sulphur diesel.</p>
+              <div class="pill-grid" style="margin-top:0.8rem">
+                <span class="pill pill-g">Solar Temporary Lighting</span>
+                <span class="pill pill-g">LED Floodlights</span>
+                <span class="pill pill-d">CPCB-Compliant DG Sets</span>
+                <span class="pill pill-d">Energy Audit Quarterly</span>
+              </div>
+            </div>
+            <div class="tab-panel" id="env-noise">
+              <p>Noisy operations (breaking, piling, crushing) are restricted to 6AM–10PM as per CPCB guidelines. Noise monitoring at site boundary must not exceed 75 dB(A) during daytime. Sound barriers should surround high-noise equipment.</p>
+              <div class="pill-grid" style="margin-top:0.8rem">
+                <span class="pill pill-g">Noise Monitoring Log</span>
+                <span class="pill pill-g">Sound Barriers</span>
+                <span class="pill pill-d">Time-Restricted Blasting</span>
+                <span class="pill pill-d">Community Notification</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- S4 -->
+      <!-- ── S4 ── -->
       <div class="section" id="s4">
-        <p class="section-number">Section 04</p>
-        <h2 class="section-title">Community &amp; CSR Integration</h2>
+        <div class="section-header">
+          <span class="section-num">Section 04</span>
+          <h2 class="section-title">Community &amp; CSR Integration</h2>
+        </div>
         <div class="section-body">
-          <p>Construction projects must consider their impact on surrounding communities. Corporate Social Responsibility initiatives should be woven into project planning from the outset.</p>
           <blockquote>
             <p>"CSR initiatives enhance a project's social acceptance and contribute meaningfully to sustainable urban development."</p>
           </blockquote>
-          <div class="pill-grid">
-            <span class="pill pill-gold">Tree Plantation Drives</span>
-            <span class="pill pill-gold">Public Area Development</span>
-            <span class="pill pill-gold">Awareness Campaigns</span>
-            <span class="pill pill-gold">Community Engagement</span>
+          <div class="accordion">
+            <div class="acc-item">
+              <button class="acc-trigger" aria-expanded="false">
+                <div class="acc-trigger-left">
+                  <div class="acc-icon-wrap">🌳</div>
+                  <div>
+                    <div class="acc-title">Environmental CSR Initiatives</div>
+                    <div class="acc-subtitle">Green commitments beyond the fence line</div>
+                  </div>
+                </div>
+                <div class="acc-chevron"><svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg></div>
+              </button>
+              <div class="acc-body">
+                <div class="acc-body-inner">
+                  <p>Each project must commit to a minimum tree plantation drive compensating for any trees removed. Public green area development within 500m radius is encouraged.</p>
+                  <div class="pill-grid"><span class="pill pill-gold">Tree Plantation Drives</span><span class="pill pill-gold">Public Area Development</span><span class="pill pill-gold">Local Species Preference</span><span class="pill pill-gold">Survival Rate Monitoring</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="acc-item">
+              <button class="acc-trigger" aria-expanded="false">
+                <div class="acc-trigger-left">
+                  <div class="acc-icon-wrap">🤝</div>
+                  <div>
+                    <div class="acc-title">Community Engagement Programme</div>
+                    <div class="acc-subtitle">Awareness, jobs &amp; grievance mechanisms</div>
+                  </div>
+                </div>
+                <div class="acc-chevron"><svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg></div>
+              </button>
+              <div class="acc-body">
+                <div class="acc-body-inner">
+                  <p>Community engagement should include public awareness campaigns on dust &amp; traffic impacts, local labour preference in hiring, and a designated community grievance officer accessible during working hours.</p>
+                  <div class="pill-grid"><span class="pill pill-gold">Awareness Campaigns</span><span class="pill pill-gold">Local Employment</span><span class="pill pill-gold">Grievance Officer</span><span class="pill pill-gold">Monthly Community Reports</span></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- S5 -->
+      <!-- ── S5 ── -->
       <div class="section" id="s5">
-        <p class="section-number">Section 05</p>
-        <h2 class="section-title">Waste Management &amp; Resource Optimization</h2>
+        <div class="section-header">
+          <span class="section-num">Section 05</span>
+          <h2 class="section-title">Waste Management &amp; Resource Optimization</h2>
+        </div>
         <div class="section-body">
           <p>Effective waste management is a cornerstone of sustainable construction. All waste streams must be identified, tracked, and responsibly managed.</p>
           <div class="card-grid">
-            <div class="card">
-              <div class="card-icon">🧱</div>
-              <p class="card-title">C&amp;D Waste</p>
-              <p class="card-desc">Construction and demolition debris segregated, recycled, or disposed via authorized vendors.</p>
-            </div>
-            <div class="card">
-              <div class="card-icon">🔩</div>
-              <p class="card-title">Steel Scrap</p>
-              <p class="card-desc">Scrap metal collected and directed to licensed recyclers to recover material value.</p>
-            </div>
-            <div class="card">
-              <div class="card-icon">🪵</div>
-              <p class="card-title">Wooden Waste</p>
-              <p class="card-desc">Offcuts and formwork timber reused where possible; remainder disposed responsibly.</p>
-            </div>
-            <div class="card">
-              <div class="card-icon">💧</div>
-              <p class="card-title">Water Waste</p>
-              <p class="card-desc">Effluent treated via STP and recycled for non-potable construction uses.</p>
+            <div class="card"><div class="card-icon">🧱</div><p class="card-title">C&amp;D Waste</p><p class="card-desc">Construction and demolition debris segregated, recycled, or disposed via authorized vendors per MoEF C&amp;D Waste Rules 2016.</p></div>
+            <div class="card"><div class="card-icon">🔩</div><p class="card-title">Steel Scrap</p><p class="card-desc">Scrap metal collected daily and directed to licensed recyclers. Maintain consignment notes and weight records.</p></div>
+            <div class="card"><div class="card-icon">🪵</div><p class="card-title">Wooden Waste</p><p class="card-desc">Offcuts and formwork timber reused where possible; remainder disposed responsibly. No site burning permitted.</p></div>
+            <div class="card"><div class="card-icon">🛢️</div><p class="card-title">Hazardous Waste</p><p class="card-desc">Used oil, paint waste &amp; chemical containers stored in bunded areas and handed over to CPCB-authorised recyclers.</p></div>
+          </div>
+
+          <div class="accordion" style="margin-top:1.2rem">
+            <div class="acc-item">
+              <button class="acc-trigger" aria-expanded="false">
+                <div class="acc-trigger-left">
+                  <div class="acc-icon-wrap">♻️</div>
+                  <div>
+                    <div class="acc-title">Waste Stream Register</div>
+                    <div class="acc-subtitle">Track &amp; categorise all waste types on-site</div>
+                  </div>
+                </div>
+                <div class="acc-chevron"><svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg></div>
+              </button>
+              <div class="acc-body">
+                <div class="acc-body-inner">
+                  <p>A complete waste register must be maintained and available for inspection at all times. Each category requires a dedicated segregated storage zone with signage.</p>
+                  <table class="risk-table" style="margin-top:0.8rem">
+                    <thead><tr><th>Waste Type</th><th>Category</th><th>Disposal Route</th></tr></thead>
+                    <tbody>
+                      <tr><td>Concrete debris</td><td><span class="rl rl-l">Inert</span></td><td>Licensed C&amp;D facility</td></tr>
+                      <tr><td>Steel reinforcement</td><td><span class="rl rl-l">Recyclable</span></td><td>CPCB-authorised recycler</td></tr>
+                      <tr><td>Used engine oil</td><td><span class="rl rl-h">Hazardous</span></td><td>Authorised recycler + manifest</td></tr>
+                      <tr><td>Domestic/canteen</td><td><span class="rl rl-l">Municipal</span></td><td>ULB collection daily</td></tr>
+                      <tr><td>Paint &amp; solvent cans</td><td><span class="rl rl-h">Hazardous</span></td><td>Vendor take-back + manifest</td></tr>
+                      <tr><td>Timber offcuts</td><td><span class="rl rl-m">Mixed</span></td><td>Reuse / authorised disposal</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- S6 -->
+      <!-- ── S6 ── -->
       <div class="section" id="s6">
-        <p class="section-number">Section 06</p>
-        <h2 class="section-title">Fire Safety &amp; Hazard Management</h2>
+        <div class="section-header">
+          <span class="section-num">Section 06</span>
+          <h2 class="section-title">Fire Safety &amp; Hazard Management</h2>
+        </div>
         <div class="section-body">
           <p>Fire safety during construction is often overlooked despite the presence of flammable materials and temporary electrical setups. GRAP norm compliance is essential in Delhi NCR during high-pollution periods.</p>
-          <div class="subsection">
-            <h4>Key Measures</h4>
-            <div class="pill-grid">
-              <span class="pill pill-rust">Strategic Extinguisher Placement</span>
-              <span class="pill pill-rust">Fire Response Training</span>
-              <span class="pill pill-rust">Safe Chemical Storage</span>
-              <span class="pill pill-rust">Electrical System Audits</span>
-              <span class="pill pill-rust">GRAP Compliance</span>
+          <div class="accordion">
+            <div class="acc-item">
+              <button class="acc-trigger" aria-expanded="false">
+                <div class="acc-trigger-left">
+                  <div class="acc-icon-wrap">🔥</div>
+                  <div>
+                    <div class="acc-title">Fire Prevention Measures</div>
+                    <div class="acc-subtitle">Equipment, training &amp; storage protocols</div>
+                  </div>
+                </div>
+                <div class="acc-chevron"><svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg></div>
+              </button>
+              <div class="acc-body">
+                <div class="acc-body-inner">
+                  <p>Extinguishers placed at every 15m interval, welding bays, electrical DB boards, and chemical stores. Monthly inspection and pressure checks mandatory.</p>
+                  <div class="pill-grid">
+                    <span class="pill pill-d">Extinguisher Grid (every 15m)</span>
+                    <span class="pill pill-d">Fire Response Drills (quarterly)</span>
+                    <span class="pill pill-d">Safe Chemical Storage</span>
+                    <span class="pill pill-d">Hot Work Permit System</span>
+                    <span class="pill pill-d">GRAP Compliance</span>
+                    <span class="pill pill-d">Electrical Audit (monthly)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="acc-item">
+              <button class="acc-trigger" aria-expanded="false">
+                <div class="acc-trigger-left">
+                  <div class="acc-icon-wrap">🚨</div>
+                  <div>
+                    <div class="acc-title">Emergency Response Plan</div>
+                    <div class="acc-subtitle">Evacuation, assembly &amp; communication protocol</div>
+                  </div>
+                </div>
+                <div class="acc-chevron"><svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg></div>
+              </button>
+              <div class="acc-body">
+                <div class="acc-body-inner">
+                  <p>A site-specific Emergency Response Plan (ERP) must be prepared, communicated to all workers during induction, and displayed at site entrance and every floor. Assembly point must be marked and unobstructed at all times.</p>
+                  <div class="timeline">
+                    <div class="tl-item"><div class="tl-phase">T + 0 min</div><div class="tl-heading">Alarm Activation</div><div class="tl-detail">Person detecting emergency activates nearest alarm point and calls EHS officer.</div></div>
+                    <div class="tl-item"><div class="tl-phase">T + 2 min</div><div class="tl-heading">Site Evacuation</div><div class="tl-detail">All workers evacuate via designated routes to assembly points. Floor wardens sweep all areas.</div></div>
+                    <div class="tl-item"><div class="tl-phase">T + 5 min</div><div class="tl-heading">Head Count</div><div class="tl-detail">Supervisors conduct headcount and report to EHS officer. Missing persons reported immediately.</div></div>
+                    <div class="tl-item"><div class="tl-phase">T + 10 min</div><div class="tl-heading">External Services</div><div class="tl-detail">Fire brigade / ambulance called if required. Project Manager notified. Media blackout enforced.</div></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- S7 -->
+      <!-- ── S7 ── -->
       <div class="section" id="s7">
-        <p class="section-number">Section 07</p>
-        <h2 class="section-title">Chemical &amp; Hazardous Material Management</h2>
+        <div class="section-header">
+          <span class="section-num">Section 07</span>
+          <h2 class="section-title">Chemical &amp; Hazardous Material Management</h2>
+        </div>
         <div class="section-body">
           <p>Handling chemicals safely is crucial to prevent environmental contamination and health hazards across the site and surrounding areas.</p>
-          <div class="subsection">
-            <h4>Best Practices</h4>
-            <div class="pill-grid">
-              <span class="pill pill-rust">MSDS Labeling &amp; Storage</span>
-              <span class="pill pill-rust">Secondary Containment</span>
-              <span class="pill pill-rust">Spill Response Plans</span>
-              <span class="pill pill-rust">Safe Handling Training</span>
+          <div class="accordion">
+            <div class="acc-item">
+              <button class="acc-trigger" aria-expanded="false">
+                <div class="acc-trigger-left">
+                  <div class="acc-icon-wrap">⚗️</div>
+                  <div>
+                    <div class="acc-title">MSDS &amp; Chemical Inventory</div>
+                    <div class="acc-subtitle">Documentation, labelling &amp; storage standards</div>
+                  </div>
+                </div>
+                <div class="acc-chevron"><svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg></div>
+              </button>
+              <div class="acc-body">
+                <div class="acc-body-inner">
+                  <p>Every chemical on-site must have a current MSDS sheet stored at the store and available to workers in their language. GHS hazard labels must be affixed on all containers.</p>
+                  <div class="pill-grid">
+                    <span class="pill pill-d">MSDS Binder at Store</span>
+                    <span class="pill pill-d">GHS Labelling</span>
+                    <span class="pill pill-d">Secondary Containment (110% volume)</span>
+                    <span class="pill pill-d">Spill Kits at Chemical Stores</span>
+                    <span class="pill pill-d">Incompatibility Segregation</span>
+                    <span class="pill pill-d">Safe Handling Training</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- S8 -->
+      <!-- ── S8 ── -->
       <div class="section" id="s8">
-        <p class="section-number">Section 08</p>
-        <h2 class="section-title">Soil Conservation &amp; Natural Resource Protection</h2>
+        <div class="section-header">
+          <span class="section-num">Section 08</span>
+          <h2 class="section-title">Soil Conservation &amp; Natural Resource Protection</h2>
+        </div>
         <div class="section-body">
           <p>Construction activities often disturb natural soil conditions. Preserving soil integrity and preventing erosion are essential environmental obligations.</p>
-          <div class="pill-grid">
-            <span class="pill pill-sage">Controlled Excavation</span>
-            <span class="pill pill-sage">Retaining Structures</span>
-            <span class="pill pill-sage">Excavated Soil Reuse</span>
+          <div class="accordion">
+            <div class="acc-item">
+              <button class="acc-trigger" aria-expanded="false">
+                <div class="acc-trigger-left">
+                  <div class="acc-icon-wrap">🌱</div>
+                  <div>
+                    <div class="acc-title">Erosion &amp; Sediment Control</div>
+                    <div class="acc-subtitle">Protecting site boundaries and drainage</div>
+                  </div>
+                </div>
+                <div class="acc-chevron"><svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg></div>
+              </button>
+              <div class="acc-body">
+                <div class="acc-body-inner">
+                  <p>Silt fences and sediment traps must be installed along drainage pathways. Excavated topsoil must be stored separately and reused in landscaping to preserve fertility.</p>
+                  <div class="pill-grid">
+                    <span class="pill pill-g">Controlled Excavation</span>
+                    <span class="pill pill-g">Retaining Structures</span>
+                    <span class="pill pill-g">Silt Fences at Boundary</span>
+                    <span class="pill pill-g">Topsoil Stockpile Management</span>
+                    <span class="pill pill-g">Excavated Soil Reuse Plan</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- S9 -->
+      <!-- ── S9 ── -->
       <div class="section" id="s9">
-        <p class="section-number">Section 09</p>
-        <h2 class="section-title">ESG Compliance &amp; Carbon Footprint Reduction</h2>
+        <div class="section-header">
+          <span class="section-num">Section 09</span>
+          <h2 class="section-title">ESG Compliance &amp; Carbon Footprint Reduction</h2>
+        </div>
         <div class="section-body">
           <p>ESG principles are becoming increasingly central to construction project evaluation, financing, and social license to operate.</p>
           <div class="card-grid">
-            <div class="card">
-              <div class="card-icon">🌿</div>
-              <p class="card-title">Efficient Materials</p>
-              <p class="card-desc">Precise material planning and green alternatives to reduce embodied carbon.</p>
-            </div>
-            <div class="card">
-              <div class="card-icon">⚙️</div>
-              <p class="card-title">Low-Emission Machinery</p>
-              <p class="card-desc">Preference for BS-VI compliant or electric plant and equipment on-site.</p>
-            </div>
-            <div class="card">
-              <div class="card-icon">🚛</div>
-              <p class="card-title">Transport Optimization</p>
-              <p class="card-desc">Logistics planning to minimize vehicle trips and associated emissions.</p>
-            </div>
-            <div class="card">
-              <div class="card-icon">👷</div>
-              <p class="card-title">Worker Well-Being</p>
-              <p class="card-desc">Safe, healthy working conditions as a critical social ESG component.</p>
+            <div class="card"><div class="card-icon">🌿</div><p class="card-title">Efficient Materials</p><p class="card-desc">Precise material planning and green alternatives (AAC blocks, fly-ash bricks) to reduce embodied carbon.</p></div>
+            <div class="card"><div class="card-icon">⚙️</div><p class="card-title">Low-Emission Machinery</p><p class="card-desc">Preference for BS-VI compliant or electric plant and equipment on-site wherever feasible.</p></div>
+            <div class="card"><div class="card-icon">🚛</div><p class="card-title">Transport Optimization</p><p class="card-desc">Logistics planning to minimize vehicle trips, using GPS-tracked fleets with load efficiency targets.</p></div>
+            <div class="card"><div class="card-icon">📊</div><p class="card-title">Carbon Accounting</p><p class="card-desc">Monthly GHG inventory maintained across Scope 1 (DG sets, vehicles) and Scope 2 (electricity) emissions.</p></div>
+          </div>
+
+          <div class="accordion" style="margin-top:1.2rem">
+            <div class="acc-item">
+              <button class="acc-trigger" aria-expanded="false">
+                <div class="acc-trigger-left">
+                  <div class="acc-icon-wrap">🏆</div>
+                  <div>
+                    <div class="acc-title">Green Building Certifications</div>
+                    <div class="acc-subtitle">IGBC, GRIHA &amp; LEED pathways explained</div>
+                  </div>
+                </div>
+                <div class="acc-chevron"><svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg></div>
+              </button>
+              <div class="acc-body">
+                <div class="acc-body-inner">
+                  <p><strong>IGBC Green Homes / Green Factory</strong> is the most common Indian certification. <strong>GRIHA</strong> is mandatory for government projects above 500 sqm. <strong>LEED India</strong> is preferred by multinational occupiers. EHS controls during construction directly contribute to construction activity credits in all three rating systems.</p>
+                  <div class="pill-grid" style="margin-top:0.8rem">
+                    <span class="pill pill-g">IGBC Green Homes</span>
+                    <span class="pill pill-g">GRIHA (Mandatory Gov't)</span>
+                    <span class="pill pill-g">LEED India</span>
+                    <span class="pill pill-gold">BEE Star Rating</span>
+                    <span class="pill pill-gold">WELL Building Standard</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- S10 -->
+      <!-- ── S10 ── -->
       <div class="section" id="s10">
-        <p class="section-number">Section 10</p>
-        <h2 class="section-title">Work Safety Management Framework</h2>
+        <div class="section-header">
+          <span class="section-num">Section 10</span>
+          <h2 class="section-title">Work Safety Management Framework</h2>
+        </div>
         <div class="section-body">
           <p>Safety management must be integrated into every stage of construction. Activity-based risk assessment ensures hazards are identified and mitigated before work begins.</p>
+
           <table class="risk-table">
             <thead>
-              <tr>
-                <th>Activity</th>
-                <th>Key Hazard</th>
-                <th>Risk Level</th>
-              </tr>
+              <tr><th>Activity</th><th>Key Hazard</th><th>Risk Level</th><th>Key Control</th></tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Excavation</td>
-                <td>Cave-ins, utility damage</td>
-                <td><span class="risk-level risk-high">High</span></td>
-              </tr>
-              <tr>
-                <td>Work at Height</td>
-                <td>Falls from elevation</td>
-                <td><span class="risk-level risk-high">High</span></td>
-              </tr>
-              <tr>
-                <td>RCC Work</td>
-                <td>Formwork instability</td>
-                <td><span class="risk-level risk-med">Medium</span></td>
-              </tr>
-              <tr>
-                <td>MEP Work</td>
-                <td>Electrical hazards</td>
-                <td><span class="risk-level risk-high">High</span></td>
-              </tr>
-              <tr>
-                <td>Finishing Work</td>
-                <td>Chemical exposure</td>
-                <td><span class="risk-level risk-med">Medium</span></td>
-              </tr>
-              <tr>
-                <td>Structural Steel &amp; Façade</td>
-                <td>Lifting &amp; rigging risks</td>
-                <td><span class="risk-level risk-high">High</span></td>
-              </tr>
+              <tr><td>Excavation</td><td>Cave-ins, utility damage</td><td><span class="rl rl-h">High</span></td><td>Shoring, utility mapping</td></tr>
+              <tr><td>Work at Height</td><td>Falls from elevation</td><td><span class="rl rl-h">High</span></td><td>Scaffolding, harness, edge protection</td></tr>
+              <tr><td>RCC Work</td><td>Formwork instability</td><td><span class="rl rl-m">Medium</span></td><td>Propping design, load limits</td></tr>
+              <tr><td>MEP Work</td><td>Electrical hazards</td><td><span class="rl rl-h">High</span></td><td>LOTO, ELCB, rubber mats</td></tr>
+              <tr><td>Finishing Work</td><td>Chemical exposure</td><td><span class="rl rl-m">Medium</span></td><td>PPE, ventilation, MSDS</td></tr>
+              <tr><td>Structural Steel</td><td>Lifting &amp; rigging risks</td><td><span class="rl rl-h">High</span></td><td>Rigging plan, exclusion zone</td></tr>
+              <tr><td>Confined Space</td><td>Asphyxiation, entrapment</td><td><span class="rl rl-h">High</span></td><td>Permit to Work, gas monitor</td></tr>
             </tbody>
           </table>
-          <div class="subsection" style="margin-top:1.5rem">
-            <h4>Training Need Analysis (TNA)</h4>
-            <p style="font-size:0.88rem;line-height:1.7;color:rgba(26,26,24,0.72)">Identifying skill gaps and conducting targeted safety training programs ensures that the right personnel are equipped for each activity's unique risk profile.</p>
+
+          <div class="accordion" style="margin-top:1.4rem">
+            <div class="acc-item">
+              <button class="acc-trigger" aria-expanded="false">
+                <div class="acc-trigger-left">
+                  <div class="acc-icon-wrap">🎓</div>
+                  <div>
+                    <div class="acc-title">Training Need Analysis (TNA)</div>
+                    <div class="acc-subtitle">Role-based safety training matrix</div>
+                  </div>
+                </div>
+                <div class="acc-chevron"><svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg></div>
+              </button>
+              <div class="acc-body">
+                <div class="acc-body-inner">
+                  <p>Identifying skill gaps and conducting targeted safety training programs ensures that the right personnel are equipped for each activity's unique risk profile.</p>
+                  <table class="risk-table" style="margin-top:0.8rem">
+                    <thead><tr><th>Role</th><th>Mandatory Training</th><th>Frequency</th></tr></thead>
+                    <tbody>
+                      <tr><td>All Workers</td><td>Site Induction + PPE Use</td><td>On Joining</td></tr>
+                      <tr><td>Scaffold Erectors</td><td>Advanced Scaffold Safety</td><td>Annual</td></tr>
+                      <tr><td>Crane Operators</td><td>Rigging &amp; Slinging</td><td>Annual + Licence</td></tr>
+                      <tr><td>Electricians</td><td>LOTO + Electrical Safety</td><td>Annual</td></tr>
+                      <tr><td>EHS Officers</td><td>NEBOSH / IOSH Managing Safely</td><td>Once + CPD</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="acc-item">
+              <button class="acc-trigger" aria-expanded="false">
+                <div class="acc-trigger-left">
+                  <div class="acc-icon-wrap">🪪</div>
+                  <div>
+                    <div class="acc-title">Permit to Work (PTW) System</div>
+                    <div class="acc-subtitle">High-risk activity authorisation process</div>
+                  </div>
+                </div>
+                <div class="acc-chevron"><svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg></div>
+              </button>
+              <div class="acc-body">
+                <div class="acc-body-inner">
+                  <p>A Permit to Work system is mandatory for hot work, confined space entry, work at height above 2m, electrical isolation, and excavation near utilities. Permits must be signed by a competent EHS officer and displayed at the work location.</p>
+                  <div class="pill-grid" style="margin-top:0.8rem">
+                    <span class="pill pill-d">Hot Work Permit</span>
+                    <span class="pill pill-d">Confined Space Entry Permit</span>
+                    <span class="pill pill-d">Height Work Permit</span>
+                    <span class="pill pill-d">Electrical Isolation Permit</span>
+                    <span class="pill pill-d">Excavation Permit</span>
+                    <span class="pill pill-d">Night Work Permit</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- S11 -->
+      <!-- ── S11 ── -->
       <div class="section" id="s11">
-        <p class="section-number">Section 11</p>
-        <h2 class="section-title">Awareness &amp; Continuous Improvement</h2>
+        <div class="section-header">
+          <span class="section-num">Section 11</span>
+          <h2 class="section-title">Awareness &amp; Continuous Improvement</h2>
+        </div>
         <div class="section-body">
           <p>Maintaining high EHS standards requires a culture of continuous learning, not just periodic compliance checks.</p>
-          <div class="pill-grid">
-            <span class="pill pill-sage">Daily Toolbox Talks</span>
-            <span class="pill pill-sage">Weekly Safety Meetings</span>
-            <span class="pill pill-sage">Monthly Audits</span>
-            <span class="pill pill-gold">Feedback Mechanisms</span>
-            <span class="pill pill-gold">Improvement Tracking</span>
+
+          <div class="tabs">
+            <div class="tab-nav">
+              <button class="tab-btn active" onclick="switchTab(this,'ci-daily')">📅 Daily</button>
+              <button class="tab-btn" onclick="switchTab(this,'ci-weekly')">📆 Weekly</button>
+              <button class="tab-btn" onclick="switchTab(this,'ci-monthly')">🗓️ Monthly</button>
+              <button class="tab-btn" onclick="switchTab(this,'ci-annual')">📊 Annual</button>
+            </div>
+            <div class="tab-panel active" id="ci-daily">
+              <p><strong>Daily Toolbox Talks (TBT)</strong> — 10-minute briefings each morning covering the day's specific hazards, any near-miss learnings from the previous day, PPE checks, and weather advisories. Attendance must be recorded and signed.</p>
+              <div class="pill-grid" style="margin-top:0.8rem">
+                <span class="pill pill-g">Toolbox Talks (TBT)</span>
+                <span class="pill pill-g">PPE Inspection</span>
+                <span class="pill pill-g">Site Hazard Walk</span>
+                <span class="pill pill-d">Near-Miss Reporting</span>
+              </div>
+            </div>
+            <div class="tab-panel" id="ci-weekly">
+              <p><strong>Weekly Safety Committee Meeting</strong> — EHS officer, supervisors, and sub-contractor leads review the week's incidents, unsafe acts observed, inspection findings, and upcoming high-risk activities. Action items tracked to closure.</p>
+              <div class="pill-grid" style="margin-top:0.8rem">
+                <span class="pill pill-g">Safety Committee Meeting</span>
+                <span class="pill pill-g">Sub-contractor Review</span>
+                <span class="pill pill-g">Site Safety Inspection</span>
+                <span class="pill pill-d">Action Closure Tracking</span>
+              </div>
+            </div>
+            <div class="tab-panel" id="ci-monthly">
+              <p><strong>Monthly EHS Audit</strong> — Structured inspection against a checklist covering all site areas, documentation review, and worker interviews. Results reported to Project Director with a corrective action plan. Leading &amp; lagging indicators published.</p>
+              <div class="pill-grid" style="margin-top:0.8rem">
+                <span class="pill pill-g">Formal EHS Audit</span>
+                <span class="pill pill-g">Corrective Action Plan</span>
+                <span class="pill pill-g">KPI Dashboard Update</span>
+                <span class="pill pill-gold">Feedback Mechanisms</span>
+              </div>
+            </div>
+            <div class="tab-panel" id="ci-annual">
+              <p><strong>Annual Management Review</strong> — Comprehensive EHS performance review by senior management covering incident trends, regulatory compliance status, audit findings, training records, and targets for the next year. Feeds into ESG reporting.</p>
+              <div class="pill-grid" style="margin-top:0.8rem">
+                <span class="pill pill-g">Management Review Meeting</span>
+                <span class="pill pill-g">Annual EHS Report</span>
+                <span class="pill pill-gold">ESG Disclosure Update</span>
+                <span class="pill pill-gold">Target Setting for Next Year</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- CONCLUSION -->
+      <!-- ── CONCLUSION ── -->
       <div class="section visible" id="conclusion">
         <div class="conclusion">
           <div class="conclusion-inner">
@@ -916,33 +1589,85 @@
 </footer>
 
 <script>
-  // Intersection observer for scroll animations
-  const sections = document.querySelectorAll('.section');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.08 });
+  /* ── PROGRESS BAR ── */
+  const bar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (window.scrollY / max * 100) + '%';
+  });
 
-  sections.forEach(s => observer.observe(s));
+  /* ── TOP NAV ── */
+  const topnav = document.getElementById('topnav');
+  window.addEventListener('scroll', () => {
+    topnav.classList.toggle('visible', window.scrollY > 200);
+  });
 
-  // Active TOC highlighting
-  const tocLinks = document.querySelectorAll('.toc-list a');
+  /* ── SCROLL REVEAL ── */
+  const sections = document.querySelectorAll('.section:not(.visible)');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.07 });
+  sections.forEach(s => revealObs.observe(s));
+
+  /* ── ACTIVE TOC ── */
+  const tocItems = document.querySelectorAll('#toc-list li');
   const sectionEls = document.querySelectorAll('.section[id]');
-
-  const tocObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        tocLinks.forEach(link => link.classList.remove('active'));
-        const active = document.querySelector(`.toc-list a[href="#${entry.target.id}"]`);
-        if (active) active.classList.add('active');
+  const tocObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        tocItems.forEach(li => li.classList.remove('active'));
+        const t = document.querySelector(`#toc-list li a[href="#${e.target.id}"]`);
+        if (t) t.parentElement.classList.add('active');
       }
     });
-  }, { rootMargin: '-30% 0px -60% 0px' });
+  }, { rootMargin: '-25% 0px -65% 0px' });
+  sectionEls.forEach(s => tocObs.observe(s));
 
-  sectionEls.forEach(s => tocObserver.observe(s));
+  /* ── ACCORDION ── */
+  document.querySelectorAll('.acc-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.acc-item');
+      const body = item.querySelector('.acc-body');
+      const isOpen = item.classList.contains('open');
+
+      // Close siblings in same accordion
+      const siblings = btn.closest('.accordion')?.querySelectorAll('.acc-item') || [];
+      siblings.forEach(s => {
+        if (s !== item) {
+          s.classList.remove('open');
+          s.querySelector('.acc-body').style.maxHeight = '0';
+          s.querySelector('.acc-trigger').setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      if (isOpen) {
+        item.classList.remove('open');
+        body.style.maxHeight = '0';
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        item.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* ── TABS ── */
+  function switchTab(btn, panelId) {
+    const container = btn.closest('.tabs');
+    container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    container.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(panelId).classList.add('active');
+  }
+
+  /* ── CHECKLIST ── */
+  function toggleCheck(item, clId, total) {
+    item.classList.toggle('checked');
+    const count = document.querySelectorAll(`[data-cl="${clId}"] .cl-item.checked`).length;
+    document.getElementById(`${clId}-score`).textContent = `${count} / ${total} complete`;
+    document.getElementById(`${clId}-bar`).style.width = `${(count / total) * 100}%`;
+  }
 </script>
 </body>
 </html>
